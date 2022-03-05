@@ -6,21 +6,14 @@ import {
   ChevronRight,
   ChevronsLeft,
   ChevronsRight,
+  Plus,
 } from "lucide-react";
 
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
-import { FaxHistoryTable } from "@/app/fax_history/components/fax-history-table";
+import { ContactsTable } from "@/app/contacts/components/contact_table";
 
-export default function FaxHistoryPage() {
+export default function ContactsPage() {
   const [currentPage, setCurrentPage] = useState(1);
-  const [statusFilter, setStatusFilter] = useState("all");
   const [totalPages, setTotalPages] = useState(1);
   const [filteredCount, setFilteredCount] = useState(0);
 
@@ -31,37 +24,19 @@ export default function FaxHistoryPage() {
 
   return (
     <div className="container mx-auto py-6">
-      <div className="mb-6">
-        <h1 className="text-3xl font-bold">Fax History</h1>
-        <p className="text-muted-foreground mt-2">
-          View and manage your sent faxes
-        </p>
-      </div>
-
-      {/* Status Filter */}
-      <div className="flex justify-end mb-6">
-        <Select
-          value={statusFilter}
-          onValueChange={(value) => {
-            setStatusFilter(value);
-            setCurrentPage(1); // Reset to first page on filter change
-          }}
-        >
-          <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder="Filter by status" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">All Statuses</SelectItem>
-            <SelectItem value="successful">Successful</SelectItem>
-            <SelectItem value="pending">Pending</SelectItem>
-            <SelectItem value="failed">Failed</SelectItem>
-          </SelectContent>
-        </Select>
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+        <div>
+          <h1 className="text-3xl font-bold">Contacts</h1>
+          <p className="text-muted-foreground mt-2">Manage your fax contacts</p>
+        </div>
+        <Button className="sm:self-start">
+          <Plus className="mr-2 h-4 w-4" />
+          Add Contact
+        </Button>
       </div>
 
       {/* Table Component */}
-      <FaxHistoryTable
-        statusFilter={statusFilter}
+      <ContactsTable
         currentPage={currentPage}
         itemsPerPage={itemsPerPage}
         onPageChange={setCurrentPage}
@@ -75,7 +50,7 @@ export default function FaxHistoryPage() {
           <div className="text-sm text-muted-foreground">
             Showing {startIndex + 1}-
             {Math.min(startIndex + itemsPerPage, filteredCount)} of{" "}
-            {filteredCount} records
+            {filteredCount} contacts
           </div>
           <div className="flex items-center justify-center sm:justify-end space-x-2">
             <Button

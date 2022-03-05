@@ -1,5 +1,6 @@
 import type React from "react";
 import type { Metadata } from "next";
+import Link from "next/link";
 import "./globals.css";
 import {
   SidebarProvider,
@@ -30,7 +31,14 @@ export default function RootLayout({
             <header className="sticky top-0 flex h-16 items-center justify-between gap-2 border-b bg-background px-4">
               <div className="flex items-center">
                 <SidebarTrigger className="-ml-1" />
-                <p className="ml-2 text-lg font-semibold">FaxPanda</p>
+                <p className="ml-2 text-lg font-semibold">
+                  <Link
+                    href="/account"
+                    className="flex items-center space-x-3 rtl:space-x-reverse"
+                  >
+                    FaxPanda
+                  </Link>
+                </p>
               </div>
               <Button>Logout</Button>
             </header>
