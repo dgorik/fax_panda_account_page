@@ -29,7 +29,7 @@ const items = [
   },
   {
     title: "Fax History",
-    href: "/history",
+    href: "/fax_history",
     icon: Clock,
   },
   {

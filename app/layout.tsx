@@ -7,6 +7,7 @@ import {
   SidebarInset,
 } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app_sidebar";
+import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -26,9 +27,12 @@ export default function RootLayout({
           <AppSidebar />
           {/*  */}
           <SidebarInset>
-            <header className="sticky top-0 flex h-16 items-center gap-2 border-b bg-background px-4">
-              <SidebarTrigger className="-ml-1" />
-              <div className="ml-2 text-lg font-semibold">FaxPanda</div>
+            <header className="sticky top-0 flex h-16 items-center justify-between gap-2 border-b bg-background px-4">
+              <div className="flex items-center">
+                <SidebarTrigger className="-ml-1" />
+                <p className="ml-2 text-lg font-semibold">FaxPanda</p>
+              </div>
+              <Button>Logout</Button>
             </header>
             <main className="p-4 md:p-6">{children}</main>
           </SidebarInset>
