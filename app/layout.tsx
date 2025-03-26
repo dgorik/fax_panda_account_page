@@ -6,7 +6,7 @@ import {
   SidebarTrigger,
   SidebarInset,
 } from "@/components/ui/sidebar";
-import Sidebar from "@/components/app_sidebar";
+import { AppSidebar } from "@/components/app_sidebar";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -23,12 +23,12 @@ export default function RootLayout({
       <body>
         {/* Sidebar provider handles collapsable state */}
         <SidebarProvider>
-          <Sidebar />
+          <AppSidebar />
           {/*  */}
           <SidebarInset>
             <header className="sticky top-0 flex h-16 items-center gap-2 border-b bg-background px-4">
               <SidebarTrigger className="-ml-1" />
-              <div className="ml-2 text-lg font-semibold">FaxEasy</div>
+              <div className="ml-2 text-lg font-semibold">FaxPanda</div>
             </header>
             <main className="p-4 md:p-6">{children}</main>
           </SidebarInset>
