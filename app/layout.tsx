@@ -1,7 +1,12 @@
 import type React from "react";
 import type { Metadata } from "next";
 import "./globals.css";
-import Sidebar from "../components/Sidebar";
+import {
+  SidebarProvider,
+  SidebarTrigger,
+  SidebarInset,
+} from "@/components/ui/sidebar";
+import Sidebar from "@/components/app_sidebar";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,8 +21,18 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Sidebar />
-        <main>{children}</main>
+        {/* Sidebar provider handles collapsable state */}
+        <SidebarProvider>
+          <Sidebar />
+          {/*  */}
+          <SidebarInset>
+            <header className="sticky top-0 flex h-16 items-center gap-2 border-b bg-background px-4">
+              <SidebarTrigger className="-ml-1" />
+              <div className="ml-2 text-lg font-semibold">FaxEasy</div>
+            </header>
+            <main className="p-4 md:p-6">{children}</main>
+          </SidebarInset>
+        </SidebarProvider>
       </body>
     </html>
   );
