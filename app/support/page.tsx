@@ -11,6 +11,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { FaqSection } from "./components/faq_section";
 
 export default function SupportPage() {
   return (
@@ -68,6 +69,9 @@ export default function SupportPage() {
             </Button>
           </CardFooter>
         </Card>
+      </div>
+      <div className="mt-8">
+        <FaqSection />
       </div>
     </div>
   );

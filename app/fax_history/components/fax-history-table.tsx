@@ -31,7 +31,7 @@ export interface FaxRecord {
 const faxHistoryData: FaxRecord[] = [
   {
     id: 1,
-    faxId: "FX-2023-0001",
+    faxId: "123e4567-e89b-12d3-a456-426614174001",
     date: "2023-03-15T09:23:45",
     recipient: "Sarah Johnson",
     faxNumber: "+1 (555) 123-4567",
@@ -42,7 +42,7 @@ const faxHistoryData: FaxRecord[] = [
   },
   {
     id: 2,
-    faxId: "FX-2023-0002",
+    faxId: "123e4567-e89b-12d3-a456-426614174002",
     date: "2023-03-12T14:05:22",
     recipient: "Michael Chen",
     faxNumber: "+1 (555) 987-6543",
@@ -53,7 +53,7 @@ const faxHistoryData: FaxRecord[] = [
   },
   {
     id: 3,
-    faxId: "FX-2023-0003",
+    faxId: "123e4567-e89b-12d3-a456-426614174003",
     date: "2023-03-10T11:30:15",
     recipient: "Emma Wilson",
     faxNumber: "+44 (20) 1234-5678",
@@ -64,7 +64,7 @@ const faxHistoryData: FaxRecord[] = [
   },
   {
     id: 4,
-    faxId: "FX-2023-0004",
+    faxId: "123e4567-e89b-12d3-a456-426614174004",
     date: "2023-03-05T16:42:30",
     recipient: "James Rodriguez",
     faxNumber: "+34 (91) 987-6543",
@@ -75,7 +75,7 @@ const faxHistoryData: FaxRecord[] = [
   },
   {
     id: 5,
-    faxId: "FX-2023-0005",
+    faxId: "123e4567-e89b-12d3-a456-426614174005",
     date: "2023-03-01T08:15:00",
     recipient: "Olivia Brown",
     faxNumber: "+61 (2) 9876-5432",
@@ -86,7 +86,7 @@ const faxHistoryData: FaxRecord[] = [
   },
   {
     id: 6,
-    faxId: "FX-2023-0006",
+    faxId: "123e4567-e89b-12d3-a456-426614174006",
     date: "2023-02-28T13:20:45",
     recipient: "William Taylor",
     faxNumber: "+1 (555) 234-5678",
@@ -97,7 +97,7 @@ const faxHistoryData: FaxRecord[] = [
   },
   {
     id: 7,
-    faxId: "FX-2023-0007",
+    faxId: "123e4567-e89b-12d3-a456-426614174007",
     date: "2023-02-25T10:05:30",
     recipient: "Sophia Martinez",
     faxNumber: "+52 (55) 1234-5678",
@@ -108,7 +108,7 @@ const faxHistoryData: FaxRecord[] = [
   },
   {
     id: 8,
-    faxId: "FX-2023-0008",
+    faxId: "123e4567-e89b-12d3-a456-426614174008",
     date: "2023-02-20T15:45:10",
     recipient: "Benjamin Lee",
     faxNumber: "+82 (2) 1234-5678",
@@ -119,7 +119,7 @@ const faxHistoryData: FaxRecord[] = [
   },
   {
     id: 9,
-    faxId: "FX-2023-0009",
+    faxId: "123e4567-e89b-12d3-a456-426614174009",
     date: "2023-02-18T09:30:00",
     recipient: "Isabella Garcia",
     faxNumber: "+55 (11) 9876-5432",
@@ -130,7 +130,7 @@ const faxHistoryData: FaxRecord[] = [
   },
   {
     id: 10,
-    faxId: "FX-2023-0010",
+    faxId: "123e4567-e89b-12d3-a456-426614174010",
     date: "2023-02-15T14:10:25",
     recipient: "Ethan Wright",
     faxNumber: "+1 (555) 345-6789",
