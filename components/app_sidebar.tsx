@@ -34,7 +34,7 @@ const items = [
   },
   {
     title: "Send Fax",
-    href: "/send",
+    href: "/send_fax",
     icon: Send,
   },
   {

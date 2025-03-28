@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Check, Clock, X } from "lucide-react";
+import { Check, Clock, Eye, X } from "lucide-react";
 import {
   Table,
   TableBody,
@@ -12,14 +12,18 @@ import {
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
 // Define the fax record type
 export interface FaxRecord {
   id: number;
+  faxId: string;
   date: string;
   recipient: string;
+  faxNumber: string;
   email: string;
   country: string;
+  creditCost: number;
   status: "successful" | "pending" | "failed";
 }
 
@@ -27,82 +31,112 @@ export interface FaxRecord {
 const faxHistoryData: FaxRecord[] = [
   {
     id: 1,
+    faxId: "FX-2023-0001",
     date: "2023-03-15T09:23:45",
     recipient: "Sarah Johnson",
+    faxNumber: "+1 (555) 123-4567",
     email: "sarah.johnson@example.com",
     country: "United States",
+    creditCost: 2.25,
     status: "successful",
   },
   {
     id: 2,
+    faxId: "FX-2023-0002",
     date: "2023-03-12T14:05:22",
     recipient: "Michael Chen",
+    faxNumber: "+1 (555) 987-6543",
     email: "michael.chen@example.com",
     country: "Canada",
+    creditCost: 2.5,
     status: "failed",
   },
   {
     id: 3,
+    faxId: "FX-2023-0003",
     date: "2023-03-10T11:30:15",
     recipient: "Emma Wilson",
+    faxNumber: "+44 (20) 1234-5678",
     email: "emma.wilson@example.com",
     country: "United Kingdom",
+    creditCost: 3.0,
     status: "successful",
   },
   {
     id: 4,
+    faxId: "FX-2023-0004",
     date: "2023-03-05T16:42:30",
     recipient: "James Rodriguez",
+    faxNumber: "+34 (91) 987-6543",
     email: "james.r@example.com",
     country: "Spain",
+    creditCost: 3.25,
     status: "pending",
   },
   {
     id: 5,
+    faxId: "FX-2023-0005",
     date: "2023-03-01T08:15:00",
     recipient: "Olivia Brown",
+    faxNumber: "+61 (2) 9876-5432",
     email: "olivia.brown@example.com",
     country: "Australia",
+    creditCost: 3.5,
     status: "successful",
   },
   {
     id: 6,
+    faxId: "FX-2023-0006",
     date: "2023-02-28T13:20:45",
     recipient: "William Taylor",
+    faxNumber: "+1 (555) 234-5678",
     email: "william.t@example.com",
     country: "United States",
+    creditCost: 2.25,
     status: "successful",
   },
   {
     id: 7,
+    faxId: "FX-2023-0007",
     date: "2023-02-25T10:05:30",
     recipient: "Sophia Martinez",
+    faxNumber: "+52 (55) 1234-5678",
     email: "sophia.m@example.com",
     country: "Mexico",
+    creditCost: 2.75,
     status: "failed",
   },
   {
     id: 8,
+    faxId: "FX-2023-0008",
     date: "2023-02-20T15:45:10",
     recipient: "Benjamin Lee",
+    faxNumber: "+82 (2) 1234-5678",
     email: "ben.lee@example.com",
     country: "South Korea",
+    creditCost: 3.75,
     status: "successful",
   },
   {
     id: 9,
+    faxId: "FX-2023-0009",
     date: "2023-02-18T09:30:00",
     recipient: "Isabella Garcia",
+    faxNumber: "+55 (11) 9876-5432",
     email: "isabella.g@example.com",
     country: "Brazil",
+    creditCost: 3.0,
     status: "pending",
   },
   {
     id: 10,
+    faxId: "FX-2023-0010",
     date: "2023-02-15T14:10:25",
     recipient: "Ethan Wright",
+    faxNumber: "+1 (555) 345-6789",
     email: "ethan.w@example.com",
     country: "Canada",
+    creditCost: 2.5,
     status: "successful",
   },
 ];
@@ -155,6 +189,15 @@ export function FaxHistoryTable({
     }).format(date);
   };
 
+  // Format currency
+  const formatCurrency = (amount: number) => {
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+      minimumFractionDigits: 2,
+    }).format(amount);
+  };
+
   // Render status badge
   const renderStatusBadge = (status: string) => {
     switch (status) {
@@ -199,38 +242,49 @@ export function FaxHistoryTable({
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead className="w-[20%]">Date</TableHead>
-            <TableHead className="w-[20%]">Recipient</TableHead>
-            <TableHead className="hidden sm:table-cell w-[25%]">
+            <TableHead className="w-[12%]">Fax ID</TableHead>
+            <TableHead className="w-[15%]">Date</TableHead>
+            <TableHead className="w-[15%]">Recipient</TableHead>
+            <TableHead className="hidden lg:table-cell w-[15%]">
+              Fax Number
+            </TableHead>
+            <TableHead className="hidden xl:table-cell w-[15%]">
               Email
             </TableHead>
-            <TableHead className="hidden md:table-cell w-[15%]">
-              Country
-            </TableHead>
-            <TableHead className="w-[20%]">Status</TableHead>
+            <TableHead className="hidden md:table-cell w-[10%]">Cost</TableHead>
+            <TableHead className="w-[10%]">Status</TableHead>
+            <TableHead className="w-[8%]">Track</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {paginatedData.length > 0 ? (
             paginatedData.map((fax) => (
               <TableRow key={fax.id}>
-                <TableCell className="font-medium break-words">
-                  {formatDate(fax.date)}
-                </TableCell>
+                <TableCell className="font-medium">{fax.faxId}</TableCell>
+                <TableCell>{formatDate(fax.date)}</TableCell>
                 <TableCell className="break-words">{fax.recipient}</TableCell>
-                <TableCell className="hidden sm:table-cell break-words">
+                <TableCell className="hidden lg:table-cell break-words">
+                  {fax.faxNumber}
+                </TableCell>
+                <TableCell className="hidden xl:table-cell break-words">
                   {fax.email}
                 </TableCell>
-                <TableCell className="hidden md:table-cell break-words">
-                  {fax.country}
+                <TableCell className="hidden md:table-cell">
+                  {formatCurrency(fax.creditCost)}
                 </TableCell>
                 <TableCell>{renderStatusBadge(fax.status)}</TableCell>
+                <TableCell>
+                  <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
+                    <Eye className="h-4 w-4" />
+                    <span className="sr-only">Track</span>
+                  </Button>
+                </TableCell>
               </TableRow>
             ))
           ) : (
             <TableRow>
               <TableCell
-                colSpan={5}
+                colSpan={8}
                 className="text-center py-8 text-muted-foreground"
               >
                 No fax records found matching your criteria.
@@ -252,9 +306,18 @@ export function FaxHistoryTable({
               <div className="flex justify-between items-start">
                 <div>
                   <h3 className="font-medium">{fax.recipient}</h3>
-                  <p className="text-sm text-muted-foreground">{fax.email}</p>
+                  <p className="text-sm text-muted-foreground">
+                    {fax.faxNumber}
+                  </p>
+                  <p className="text-xs text-muted-foreground">{fax.faxId}</p>
                 </div>
-                <div>{renderStatusBadge(fax.status)}</div>
+                <div className="flex flex-col items-end gap-2">
+                  {renderStatusBadge(fax.status)}
+                  <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
+                    <Eye className="h-4 w-4" />
+                    <span className="sr-only">Track</span>
+                  </Button>
+                </div>
               </div>
               <div className="flex justify-between text-sm">
                 <div>
@@ -262,8 +325,8 @@ export function FaxHistoryTable({
                   <p>{formatDate(fax.date)}</p>
                 </div>
                 <div>
-                  <p className="text-muted-foreground">Country</p>
-                  <p>{fax.country}</p>
+                  <p className="text-muted-foreground">Cost</p>
+                  <p>{formatCurrency(fax.creditCost)}</p>
                 </div>
               </div>
             </CardContent>

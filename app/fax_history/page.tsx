@@ -24,7 +24,7 @@ export default function FaxHistoryPage() {
   const [totalPages, setTotalPages] = useState(1);
   const [filteredCount, setFilteredCount] = useState(0);
 
-  const itemsPerPage = 10;
+  const itemsPerPage = 5;
 
   // Calculate start index for "showing X-Y of Z" text
   const startIndex = (currentPage - 1) * itemsPerPage;
