@@ -19,6 +19,7 @@ import {
   SidebarMenuItem,
   SidebarRail,
 } from "@/components/ui/sidebar";
+import Link from "next/link";
 
 // Navigation items
 const items = [
@@ -74,7 +75,9 @@ export function AppSidebar() {
           <div className="h-8 w-8 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-semibold">
             FP
           </div>
-          <div className="font-semibold text-lg">FaxPanda</div>
+          <div className="font-semibold text-lg">
+            <Link href="/account">FaxPanda</Link>
+          </div>
         </div>
       </SidebarHeader>
 
