@@ -16,9 +16,10 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({
+  //this accepts children props (special props that allow compnents to wrap other components inside them)
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode; //meaning it can contain JSX elements, Strings, Numbers and other react components
 }) {
   return (
     <html lang="en">
@@ -28,16 +29,12 @@ export default function RootLayout({
           <AppSidebar />
           {/*  */}
           <SidebarInset>
-            <header className="sticky top-0 flex h-16 items-center justify-between gap-2 border-b bg-background px-4">
+            {/* sticky top-0 flex h-16 items-center justify-between gap-2 border-b bg-background px-4 */}
+            <header className="sticky top-0 flex h-16 items-center justify-between border-b bg-background p-4">
               <div className="flex items-center">
-                <SidebarTrigger className="-ml-1" />
-                <p className="ml-2 text-lg font-semibold">
-                  <Link
-                    href="/account"
-                    className="flex items-center space-x-3 rtl:space-x-reverse"
-                  >
-                    FaxPanda
-                  </Link>
+                <SidebarTrigger />
+                <p className="text-lg font-semibold">
+                  <Link href="/account">FaxPanda</Link>
                 </p>
               </div>
               <Button>Logout</Button>

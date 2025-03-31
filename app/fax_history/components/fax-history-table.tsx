@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect } from "react";
 import { Check, Clock, Eye, X } from "lucide-react";
 import {
   Table,
@@ -28,7 +28,7 @@ export interface FaxRecord {
 }
 
 // Fax history data
-const faxHistoryData: FaxRecord[] = [
+export const faxHistoryTable: FaxRecord[] = [
   {
     id: 1,
     faxId: "123e4567-e89b-12d3-a456-426614174001",
@@ -139,6 +139,116 @@ const faxHistoryData: FaxRecord[] = [
     creditCost: 2.5,
     status: "successful",
   },
+  {
+    id: 11,
+    faxId: "123e4567-e89b-12d3-a456-426614174011",
+    date: "2023-02-10T11:25:40",
+    recipient: "Mia Thompson",
+    faxNumber: "+44 (20) 9876-5432",
+    email: "mia.t@example.com",
+    country: "United Kingdom",
+    creditCost: 3.0,
+    status: "failed",
+  },
+  {
+    id: 12,
+    faxId: "123e4567-e89b-12d3-a456-426614174012",
+    date: "2023-02-05T16:30:15",
+    recipient: "Alexander Davis",
+    faxNumber: "+49 (30) 1234-5678",
+    email: "alex.d@example.com",
+    country: "Germany",
+    creditCost: 3.25,
+    status: "successful",
+  },
+  {
+    id: 13,
+    faxId: "123e4567-e89b-12d3-a456-426614174013",
+    date: "2023-02-01T08:45:30",
+    recipient: "Charlotte Wilson",
+    faxNumber: "+33 (1) 2345-6789",
+    email: "charlotte.w@example.com",
+    country: "France",
+    creditCost: 3.25,
+    status: "pending",
+  },
+  {
+    id: 14,
+    faxId: "123e4567-e89b-12d3-a456-426614174014",
+    date: "2023-01-28T13:15:00",
+    recipient: "Daniel Martin",
+    faxNumber: "+39 (06) 1234-5678",
+    email: "daniel.m@example.com",
+    country: "Italy",
+    creditCost: 3.25,
+    status: "successful",
+  },
+  {
+    id: 15,
+    faxId: "123e4567-e89b-12d3-a456-426614174015",
+    date: "2023-01-25T10:20:45",
+    recipient: "Amelia Anderson",
+    faxNumber: "+1 (555) 456-7890",
+    email: "amelia.a@example.com",
+    country: "United States",
+    creditCost: 2.25,
+    status: "successful",
+  },
+  {
+    id: 16,
+    faxId: "123e4567-e89b-12d3-a456-426614174016",
+    date: "2023-01-20T15:05:30",
+    recipient: "Henry Thomas",
+    faxNumber: "+1 (555) 567-8901",
+    email: "henry.t@example.com",
+    country: "Canada",
+    creditCost: 2.5,
+    status: "failed",
+  },
+  {
+    id: 17,
+    faxId: "123e4567-e89b-12d3-a456-426614174017",
+    date: "2023-01-18T09:45:10",
+    recipient: "Victoria Jackson",
+    faxNumber: "+61 (2) 3456-7890",
+    email: "victoria.j@example.com",
+    country: "Australia",
+    creditCost: 3.5,
+    status: "successful",
+  },
+  {
+    id: 18,
+    faxId: "123e4567-e89b-12d3-a456-426614174018",
+    date: "2023-01-15T14:30:00",
+    recipient: "Joseph White",
+    faxNumber: "+44 (20) 3456-7890",
+    email: "joseph.w@example.com",
+    country: "United Kingdom",
+    creditCost: 3.0,
+    status: "pending",
+  },
+  {
+    id: 19,
+    faxId: "123e4567-e89b-12d3-a456-426614174019",
+    date: "2023-01-10T11:10:25",
+    recipient: "Elizabeth Harris",
+    faxNumber: "+1 (555) 678-9012",
+    email: "elizabeth.h@example.com",
+    country: "United States",
+    creditCost: 2.25,
+    status: "successful",
+  },
+  {
+    id: 20,
+    faxId: "123e4567-e89b-12d3-a456-426614174020",
+    date: "2023-01-05T16:25:40",
+    recipient: "David Clark",
+    faxNumber: "+49 (30) 3456-7890",
+    email: "david.c@example.com",
+    country: "Germany",
+    creditCost: 3.25,
+    status: "failed",
+  },
 ];
 
 interface FaxHistoryTableProps {
@@ -159,7 +269,7 @@ export function FaxHistoryTable({
   onFilteredCountChange,
 }: FaxHistoryTableProps) {
   // Filter data based on status filter
-  const filteredData = faxHistoryData.filter((fax) => {
+  const filteredData = faxHistoryTable.filter((fax) => {
     return statusFilter === "all" || fax.status === statusFilter;
   });
 
@@ -171,11 +281,16 @@ export function FaxHistoryTable({
     startIndex + itemsPerPage
   );
 
-  // Update parent component with pagination info
-  useState(() => {
+  // Update parent component with pagination info using useEffect instead of useState
+  useEffect(() => {
     onTotalPagesChange(totalPages);
     onFilteredCountChange(filteredData.length);
-  });
+  }, [
+    totalPages,
+    filteredData.length,
+    onTotalPagesChange,
+    onFilteredCountChange,
+  ]);
 
   // Format date - more compact for table display
   const formatDate = (dateString: string) => {
@@ -196,6 +311,11 @@ export function FaxHistoryTable({
       currency: "USD",
       minimumFractionDigits: 2,
     }).format(amount);
+  };
+
+  // Format UUID to be more readable
+  const formatUUID = (uuid: string) => {
+    return uuid.substring(0, 8) + "..." + uuid.substring(uuid.length - 4);
   };
 
   // Render status badge
@@ -242,8 +362,8 @@ export function FaxHistoryTable({
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead className="w-[12%]">Fax ID</TableHead>
-            <TableHead className="w-[15%]">Date</TableHead>
+            <TableHead className="w-[15%]">Fax ID</TableHead>
+            <TableHead className="w-[12%]">Date</TableHead>
             <TableHead className="w-[15%]">Recipient</TableHead>
             <TableHead className="hidden lg:table-cell w-[15%]">
               Fax Number
@@ -253,14 +373,18 @@ export function FaxHistoryTable({
             </TableHead>
             <TableHead className="hidden md:table-cell w-[10%]">Cost</TableHead>
             <TableHead className="w-[10%]">Status</TableHead>
-            <TableHead className="w-[8%]">Track</TableHead>
+            <TableHead className="w-[8%]">Action</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {paginatedData.length > 0 ? (
             paginatedData.map((fax) => (
               <TableRow key={fax.id}>
-                <TableCell className="font-medium">{fax.faxId}</TableCell>
+                <TableCell className="font-medium">
+                  <span className="inline-block" title={fax.faxId}>
+                    {formatUUID(fax.faxId)}
+                  </span>
+                </TableCell>
                 <TableCell>{formatDate(fax.date)}</TableCell>
                 <TableCell className="break-words">{fax.recipient}</TableCell>
                 <TableCell className="hidden lg:table-cell break-words">
@@ -306,10 +430,12 @@ export function FaxHistoryTable({
               <div className="flex justify-between items-start">
                 <div>
                   <h3 className="font-medium">{fax.recipient}</h3>
+                  <p className="text-sm font-medium">
+                    ID: {formatUUID(fax.faxId)}
+                  </p>
                   <p className="text-sm text-muted-foreground">
                     {fax.faxNumber}
                   </p>
-                  <p className="text-xs text-muted-foreground">{fax.faxId}</p>
                 </div>
                 <div className="flex flex-col items-end gap-2">
                   {renderStatusBadge(fax.status)}

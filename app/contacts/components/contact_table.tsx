@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect } from "react";
 import { MoreHorizontal, Pencil, Trash, Send } from "lucide-react";
 import {
   Table,
@@ -21,7 +21,7 @@ import {
 
 // Define the contact record type
 export interface ContactRecord {
-  id: number;
+  uiiFaxIdNumber: number;
   name: string;
   faxNumber: string;
   country: string;
@@ -30,9 +30,9 @@ export interface ContactRecord {
 }
 
 // Contacts data
-const contactsData: ContactRecord[] = [
+export const contactsData: ContactRecord[] = [
   {
-    id: 1,
+    uiiFaxIdNumber: 5551234567,
     name: "Sarah Johnson",
     faxNumber: "+1 (555) 123-4567",
     country: "United States",
@@ -40,7 +40,7 @@ const contactsData: ContactRecord[] = [
     company: "Acme Corp",
   },
   {
-    id: 2,
+    uiiFaxIdNumber: 5559876543,
     name: "Michael Chen",
     faxNumber: "+1 (555) 987-6543",
     country: "Canada",
@@ -48,14 +48,14 @@ const contactsData: ContactRecord[] = [
     company: "Global Industries",
   },
   {
-    id: 3,
+    uiiFaxIdNumber: 2012345678,
     name: "Emma Wilson",
     faxNumber: "+44 (20) 1234-5678",
     country: "United Kingdom",
     email: "emma.wilson@example.com",
   },
   {
-    id: 4,
+    uiiFaxIdNumber: 9198765432,
     name: "James Rodriguez",
     faxNumber: "+34 (91) 987-6543",
     country: "Spain",
@@ -63,14 +63,14 @@ const contactsData: ContactRecord[] = [
     company: "Tech Solutions",
   },
   {
-    id: 5,
+    uiiFaxIdNumber: 2987654321,
     name: "Olivia Brown",
     faxNumber: "+61 (2) 9876-5432",
     country: "Australia",
     email: "olivia.brown@example.com",
   },
   {
-    id: 6,
+    uiiFaxIdNumber: 5552345678,
     name: "William Taylor",
     faxNumber: "+1 (555) 234-5678",
     country: "United States",
@@ -78,14 +78,14 @@ const contactsData: ContactRecord[] = [
     company: "Finance Group",
   },
   {
-    id: 7,
+    uiiFaxIdNumber: 5512345678,
     name: "Sophia Martinez",
     faxNumber: "+52 (55) 1234-5678",
     country: "Mexico",
     email: "sophia.m@example.com",
   },
   {
-    id: 8,
+    uiiFaxIdNumber: 2123456789,
     name: "Benjamin Lee",
     faxNumber: "+82 (2) 1234-5678",
     country: "South Korea",
@@ -93,14 +93,14 @@ const contactsData: ContactRecord[] = [
     company: "Digital Solutions",
   },
   {
-    id: 9,
+    uiiFaxIdNumber: 1198765432,
     name: "Isabella Garcia",
     faxNumber: "+55 (11) 9876-5432",
     country: "Brazil",
     email: "isabella.g@example.com",
   },
   {
-    id: 10,
+    uiiFaxIdNumber: 5553456789,
     name: "Ethan Wright",
     faxNumber: "+1 (555) 345-6789",
     country: "Canada",
@@ -108,14 +108,14 @@ const contactsData: ContactRecord[] = [
     company: "Wright Enterprises",
   },
   {
-    id: 11,
+    uiiFaxIdNumber: 2098765432,
     name: "Mia Thompson",
     faxNumber: "+44 (20) 9876-5432",
     country: "United Kingdom",
     email: "mia.t@example.com",
   },
   {
-    id: 12,
+    uiiFaxIdNumber: 3012345678,
     name: "Alexander Davis",
     faxNumber: "+49 (30) 1234-5678",
     country: "Germany",
@@ -123,14 +123,14 @@ const contactsData: ContactRecord[] = [
     company: "Euro Tech",
   },
   {
-    id: 13,
+    uiiFaxIdNumber: 1234567890,
     name: "Charlotte Wilson",
     faxNumber: "+33 (1) 2345-6789",
     country: "France",
     email: "charlotte.w@example.com",
   },
   {
-    id: 14,
+    uiiFaxIdNumber: 612345678,
     name: "Daniel Martin",
     faxNumber: "+39 (06) 1234-5678",
     country: "Italy",
@@ -138,7 +138,7 @@ const contactsData: ContactRecord[] = [
     company: "Martin & Associates",
   },
   {
-    id: 15,
+    uiiFaxIdNumber: 5554567890,
     name: "Amelia Anderson",
     faxNumber: "+1 (555) 456-7890",
     country: "United States",
@@ -169,38 +169,43 @@ export function ContactsTable({
     startIndex + itemsPerPage
   );
 
-  // Update parent component with pagination info
-  useState(() => {
+  // Update parent component with pagination info using useEffect instead of useState
+  useEffect(() => {
     onTotalPagesChange(totalPages);
     onFilteredCountChange(contactsData.length);
-  });
+  }, [
+    totalPages,
+    contactsData.length,
+    onTotalPagesChange,
+    onFilteredCountChange,
+  ]);
 
   // Action handlers (no actual functionality as requested)
-  const handleEdit = (id: number) => {
+  const handleEdit = (uiiFaxIdNumber: number) => {
     // This would normally handle editing the contact
-    console.log(`Edit contact ${id}`);
+    console.log(`Edit contact ${uiiFaxIdNumber}`);
   };
 
-  const handleDelete = (id: number) => {
+  const handleDelete = (uiiFaxIdNumber: number) => {
     // This would normally handle deleting the contact
-    console.log(`Delete contact ${id}`);
+    console.log(`Delete contact ${uiiFaxIdNumber}`);
   };
 
-  const handleSend = (id: number) => {
+  const handleSend = (uiiFaxIdNumber: number) => {
     // This would normally handle sending a fax to the contact
-    console.log(`Send fax to contact ${id}`);
+    console.log(`Send fax to contact ${uiiFaxIdNumber}`);
   };
 
   // Desktop/tablet view
   const renderTable = () => (
-    <div className="border rounded-md overflow-hidden">
+    <div className="border rounded-md overflow-huiiFaxIdNumberden">
       <Table>
         <TableHeader>
           <TableRow>
             <TableHead className="w-[25%]">Name</TableHead>
             <TableHead className="w-[25%]">Fax Number</TableHead>
             <TableHead className="w-[20%]">Country</TableHead>
-            <TableHead className="hidden md:table-cell w-[25%]">
+            <TableHead className="huiiFaxIdNumberden md:table-cell w-[25%]">
               Email
             </TableHead>
             <TableHead className="w-[5%]"></TableHead>
@@ -209,18 +214,23 @@ export function ContactsTable({
         <TableBody>
           {paginatedData.length > 0 ? (
             paginatedData.map((contact) => (
-              <TableRow key={contact.id}>
+              <TableRow key={contact.uiiFaxIdNumber}>
                 <TableCell className="font-medium">
-                  {contact.name}
-                  {contact.company && (
-                    <div className="text-xs text-muted-foreground">
-                      {contact.company}
-                    </div>
-                  )}
+                  <a
+                    href={`/contacts/${contact.uiiFaxIdNumber}`}
+                    className="hover:underline"
+                  >
+                    {contact.name}
+                    {contact.company && (
+                      <div className="text-xs text-muted-foreground">
+                        {contact.company}
+                      </div>
+                    )}
+                  </a>
                 </TableCell>
                 <TableCell>{contact.faxNumber}</TableCell>
                 <TableCell>{contact.country}</TableCell>
-                <TableCell className="hidden md:table-cell break-words">
+                <TableCell className="huiiFaxIdNumberden md:table-cell break-words">
                   {contact.email}
                 </TableCell>
                 <TableCell>
@@ -232,17 +242,21 @@ export function ContactsTable({
                       </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
-                      <DropdownMenuItem onClick={() => handleEdit(contact.id)}>
+                      <DropdownMenuItem
+                        onClick={() => handleEdit(contact.uiiFaxIdNumber)}
+                      >
                         <Pencil className="mr-2 h-4 w-4" />
                         <span>Edit</span>
                       </DropdownMenuItem>
                       <DropdownMenuItem
-                        onClick={() => handleDelete(contact.id)}
+                        onClick={() => handleDelete(contact.uiiFaxIdNumber)}
                       >
                         <Trash className="mr-2 h-4 w-4" />
                         <span>Delete</span>
                       </DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => handleSend(contact.id)}>
+                      <DropdownMenuItem
+                        onClick={() => handleSend(contact.uiiFaxIdNumber)}
+                      >
                         <Send className="mr-2 h-4 w-4" />
                         <span>Send Fax</span>
                       </DropdownMenuItem>
@@ -271,11 +285,18 @@ export function ContactsTable({
     <div className="sm:hidden space-y-4">
       {paginatedData.length > 0 ? (
         paginatedData.map((contact) => (
-          <Card key={contact.id}>
+          <Card key={contact.uiiFaxIdNumber}>
             <CardContent className="p-4 space-y-3">
               <div className="flex justify-between items-start">
                 <div>
-                  <h3 className="font-medium">{contact.name}</h3>
+                  <h3 className="font-medium">
+                    <a
+                      href={`/contacts/${contact.uiiFaxIdNumber}`}
+                      className="hover:underline"
+                    >
+                      {contact.name}
+                    </a>
+                  </h3>
                   {contact.company && (
                     <p className="text-sm text-muted-foreground">
                       {contact.company}
@@ -290,22 +311,28 @@ export function ContactsTable({
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end">
-                    <DropdownMenuItem onClick={() => handleEdit(contact.id)}>
+                    <DropdownMenuItem
+                      onClick={() => handleEdit(contact.uiiFaxIdNumber)}
+                    >
                       <Pencil className="mr-2 h-4 w-4" />
                       <span>Edit</span>
                     </DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => handleDelete(contact.id)}>
+                    <DropdownMenuItem
+                      onClick={() => handleDelete(contact.uiiFaxIdNumber)}
+                    >
                       <Trash className="mr-2 h-4 w-4" />
                       <span>Delete</span>
                     </DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => handleSend(contact.id)}>
+                    <DropdownMenuItem
+                      onClick={() => handleSend(contact.uiiFaxIdNumber)}
+                    >
                       <Send className="mr-2 h-4 w-4" />
                       <span>Send Fax</span>
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
               </div>
-              <div className="grid grid-cols-2 gap-2 text-sm">
+              <div className="gruiiFaxIdNumber grid-cols-2 gap-2 text-sm">
                 <div>
                   <p className="text-muted-foreground">Fax Number</p>
                   <p>{contact.faxNumber}</p>
@@ -332,7 +359,7 @@ export function ContactsTable({
 
   return (
     <>
-      {/* Table view (hidden on xs screens) */}
+      {/* Table view (huiiFaxIdNumberden on xs screens) */}
       <div className="hidden sm:block">{renderTable()}</div>
 
       {/* Card view (only visible on xs screens) */}

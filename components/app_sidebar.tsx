@@ -70,7 +70,7 @@ const userData = {
 export function AppSidebar() {
   return (
     <Sidebar>
-      <SidebarHeader className="border-b border-border p-4">
+      <SidebarHeader className="h-16 border-b p-4">
         <div className="flex items-center gap-2">
           <div className="h-8 w-8 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-semibold">
             FP
@@ -100,7 +100,7 @@ export function AppSidebar() {
         <div className="flex items-center gap-2">
           <div className="h-8 w-8 rounded-full bg-muted">
             <img
-              src={userData.avatar || "/placeholder.svg"}
+              // src={userData.avatar || "/placeholder.svg"}
               alt="User avatar"
               className="h-full w-full rounded-full"
             />
